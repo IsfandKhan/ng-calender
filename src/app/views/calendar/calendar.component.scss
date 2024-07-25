@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+
+  .calendar {
+    flex: 0.3;
+
+    mat-toolbar {
+      background-color: #1976d2;
+      color: white;
+      padding: 20px;
+    }
+  }
+
+  cal-daily-view {
+    flex: 1;
+  }
+}

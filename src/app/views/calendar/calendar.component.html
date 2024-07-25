@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="calendar">
+    <mat-toolbar color="primary">
+      <mat-icon>event</mat-icon>
+      <span>Calendar</span>
+    </mat-toolbar>
+    <mat-calendar [selected]="selectedDate" (selectedChange)="onDateChangeHandler($event)" />
+  </div>
+
+  <cal-daily-view
+    [events]="events$ | async"
+    (onEventClick)="onEventClickHandler($event)"
+    (onEventsContainerClick)="onEventsContainerClickHandler($event)"
+    (onNavigateForward)="onNavigateForwardHandler()"
+    (onNavigateBack)="onNavigateBackHandler()"
+    (onReloadEvents)="onReloadEventsHandler()"
+  />
+</div>

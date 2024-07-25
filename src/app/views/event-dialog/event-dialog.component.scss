@@ -1,0 +1,44 @@
+
+.event-dialog {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+
+  &:not(:last-child) {
+    margin-bottom: 16px;
+  }
+}
+
+mat-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px;
+
+  button {
+    margin-left: 8px;
+  }
+}
+
+@media (max-width: 600px) {
+  .mat-dialog-container {
+    width: 90vw;
+    max-width: none;
+  }
+
+  mat-form-field {
+    margin-bottom: 8px;
+  }
+
+  mat-dialog-actions {
+    justify-content: center;
+
+    button {
+      margin-left: 4px;
+    }
+  }
+}

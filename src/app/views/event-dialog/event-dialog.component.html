@@ -1,0 +1,50 @@
+<div class="event-dialog">
+  <h1 mat-dialog-title>Event</h1>
+  <form [formGroup]="eventForm" (ngSubmit)="save()">
+    <div mat-dialog-content>
+      <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" />
+        <mat-error *ngIf="eventForm.get('title')?.hasError('required')">Title is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <input matInput formControlName="description" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Start Date</mat-label>
+        <input
+          matInput
+          formControlName="start"
+          [matDatepicker]="startPicker"
+          (click)="startPicker.open()"
+          (keydown.enter)="startPicker.open()"
+        />
+        <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+        <mat-datepicker #startPicker></mat-datepicker>
+        <mat-error *ngIf="eventForm.get('start')?.hasError('required')">Start date is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>End Date</mat-label>
+        <input
+          matInput
+          formControlName="end"
+          [matDatepicker]="endPicker"
+          [min]="minEndDate"
+          (click)="endPicker.open()"
+          (keydown.enter)="endPicker.open()"
+        />
+        <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+        <mat-datepicker #endPicker></mat-datepicker>
+        <mat-error *ngIf="eventForm.get('end')?.hasError('required')">End date is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="cancel()">Cancel</button>
+      <button mat-raised-button color="primary" type="submit">Save</button>
+    </div>
+  </form>
+</div>
