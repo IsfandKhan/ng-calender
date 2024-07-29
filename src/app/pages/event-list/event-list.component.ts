@@ -10,7 +10,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { EventService } from '@services/event/event.service';
 
-import { EventDialogComponent } from '@views/event-dialog/event-dialog.component';
+import { EventDialogComponent } from '@components/event-dialog/event-dialog.component';
 
 import { ICalendarEvent } from '@interfaces/event.interface';
 
@@ -39,7 +39,7 @@ export class EventListComponent implements OnInit {
 
   public viewEvent(event: ICalendarEvent): void {
     this.dialog
-      .open(EventDialogComponent, { width: '300px', data: { event } })
+      .open(EventDialogComponent, { width: '500px', data: { event } })
       .afterClosed()
       .subscribe((result) => result && this.eventService.updateEvent(result).subscribe(() => this.loadEvents()));
   }

@@ -8,11 +8,8 @@
   </div>
 
   <cal-daily-view
-    [events]="events$ | async"
-    (onEventClick)="onEventClickHandler($event)"
-    (onEventsContainerClick)="onEventsContainerClickHandler($event)"
+    [date]="selectedDate"
     (onNavigateForward)="onNavigateForwardHandler()"
     (onNavigateBack)="onNavigateBackHandler()"
-    (onReloadEvents)="onReloadEventsHandler()"
   />
 </div>

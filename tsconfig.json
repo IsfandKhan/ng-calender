@@ -11,7 +11,9 @@
       "@pipes/*": ["app/pipes/*"],
       "@interfaces/*": ["app/interfaces/*"],
       "@views/*": ["app/views/*"],
-      "@directives/*": ["app/directives/*"]
+      "@directives/*": ["app/directives/*"],
+      "@components/*": ["app/components/*"],
+      "@pages/*": ["app/pages/*"]
     },
     "outDir": "./dist/out-tsc",
     "strict": true,

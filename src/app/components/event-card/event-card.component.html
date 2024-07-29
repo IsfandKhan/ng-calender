@@ -1,0 +1,6 @@
+<div clickStopPropagation class="event-block" [ngStyle]="getEventStyle(event)" (click)="onClickHandler()">
+  <div class="event-content">
+    <span class="event-title">{{ event.title }}</span>
+    <span class="event-time">{{ event.start | date: 'shortTime' }} - {{ event.end | date: 'shortTime' }}</span>
+  </div>
+</div>
