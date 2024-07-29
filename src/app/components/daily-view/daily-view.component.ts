@@ -14,7 +14,7 @@ import { HoursLabelComponent } from '@components/hours-label/hours-label.compone
   standalone: true,
 })
 export class DailyViewComponent implements AfterContentChecked {
-  @Input() public date = new Date();;
+  @Input() public date = new Date();
 
   @Output() public readonly onNavigateBack: EventEmitter<void> = new EventEmitter();
   @Output() public readonly onNavigateForward: EventEmitter<void> = new EventEmitter();
