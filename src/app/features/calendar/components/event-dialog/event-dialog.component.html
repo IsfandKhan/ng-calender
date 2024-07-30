@@ -5,7 +5,10 @@
       <mat-form-field appearance="fill">
         <mat-label>Title</mat-label>
         <input matInput formControlName="title" />
-        <mat-error *ngIf="isRequired('title')">Title is required</mat-error>
+
+        @if (isRequired("title")) {
+          <mat-error>Title is required</mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field appearance="fill">
@@ -24,14 +27,20 @@
         />
         <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
         <mat-datepicker #startPicker></mat-datepicker>
-        <mat-error *ngIf="isRequired('start')">Start date is required</mat-error>
+
+        @if (isRequired("start")) {
+          <mat-error>Start date is required</mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Start Time</mat-label>
         <input matInput [ngxTimepicker]="startTimePicker" [format]="24" formControlName="startTime" />
         <ngx-material-timepicker #startTimePicker></ngx-material-timepicker>
-        <mat-error *ngIf="isRequired('startTime')">Start time is required</mat-error>
+
+        @if (isRequired("startTime")) {
+          <mat-error>Start time is required</mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field appearance="fill">
@@ -46,14 +55,20 @@
         />
         <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
         <mat-datepicker #endPicker></mat-datepicker>
-        <mat-error *ngIf="isRequired('end')">End date is required</mat-error>
+
+        @if (isRequired("end")) {
+          <mat-error>End date is required</mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>End Time</mat-label>
         <input matInput [ngxTimepicker]="endTimePicker" [format]="24" formControlName="endTime" />
         <ngx-material-timepicker #endTimePicker></ngx-material-timepicker>
-        <mat-error *ngIf="isRequired('endTime')">End time is required</mat-error>
+
+        @if (isRequired("endTime")) {
+          <mat-error>End time is required</mat-error>
+        }
       </mat-form-field>
     </div>
     <div mat-dialog-actions [align]="'end'">

@@ -11,12 +11,15 @@
     <mat-calendar [selected]="selectedDate" (selectedChange)="onDateChangeHandler($event)" />
   </div>
 
-  <cal-daily-view
-    *ngIf="selectedView === CALENDAR_VIEWS.DAILY"
-    [date]="selectedDate"
-    (onNavigateForward)="onNavigateForwardHandler()"
-    (onNavigateBack)="onNavigateBackHandler()"
-  />
+  @if (selectedView === CALENDAR_VIEWS.DAILY) {
+    <cal-daily-view
+      [date]="selectedDate"
+      (onNavigateForward)="onNavigateForwardHandler()"
+      (onNavigateBack)="onNavigateBackHandler()"
+    />
+  }
 
-  <cal-weekly-view *ngIf="selectedView === CALENDAR_VIEWS.WEEKLY" [date]="selectedDate" />
+  @if (selectedView === CALENDAR_VIEWS.WEEKLY) {
+    <cal-weekly-view [date]="selectedDate" />
+  }
 </div>
