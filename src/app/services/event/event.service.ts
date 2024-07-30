@@ -3,7 +3,7 @@ import { Observable, of, catchError, map } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { ICalendarEvent } from '../../interfaces/event.interface';
+import { ICalendarEvent } from '@interfaces/event.interface';
 
 @Injectable({ providedIn: 'root' })
 export class EventService {
@@ -13,13 +13,7 @@ export class EventService {
 
   public getEvents(): Observable<ICalendarEvent[]> {
     return this.http.get<ICalendarEvent[]>(this.apiUrl).pipe(
-      map((events) => {
-        return events.map((event) => {
-          event.start = new Date(event.start);
-          event.end = new Date(event.end);
-          return event;
-        });
-      }),
+      map((events) => events.map((event) => ({ ...event, start: new Date(event.start), end: new Date(event.end) }))),
       catchError(this.handleError<ICalendarEvent[]>('getEvents', [])),
     );
   }

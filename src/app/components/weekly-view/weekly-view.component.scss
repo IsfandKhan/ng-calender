@@ -1,0 +1,53 @@
+.weekly-view {
+  flex: 1;
+  display: flex;
+  height: 100vh;
+
+  &:first-child {
+    border-left: 1px solid #ccc;
+  }
+
+  .day-column {
+    flex: 1;
+    border-right: 1px solid #ccc;
+
+    .day-header {
+      background-color: #1976d2;
+      color: white;
+      padding: 20px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .event-container {
+      height: 100%;
+      padding: 10px;
+      cursor: pointer;
+
+      .event {
+        background-color: rgba(0, 123, 255, 0.1);
+        border-left: 3px solid #007bff;
+        border-radius: 4px;
+        padding: 4px;
+        box-sizing: border-box;
+        cursor: pointer;
+        z-index: 100;
+        margin-bottom: 10px;
+
+        .event-time {
+          font-size: 0.8em;
+          color: #00796b;
+        }
+
+        .event-title {
+          font-weight: bold;
+        }
+
+        .event-description {
+          font-size: 0.8em;
+          color: #00796b;
+        }
+      }
+    }
+  }
+}

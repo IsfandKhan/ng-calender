@@ -1,4 +1,4 @@
-import { ReplaySubject, map, Observable, delay } from 'rxjs';
+import { ReplaySubject, map, Observable } from 'rxjs';
 
 import { Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -15,7 +15,8 @@ import { ClickStopPropagationDirective } from '@directives/click-stop-propagatio
 import { IEventStyle } from '@interfaces/common.interface';
 import { ICalendarEvent } from '@interfaces/event.interface';
 
-import { calculateClickedHourAndMinute, getEventStyle, HOURS_IN_A_DAY } from '@utils/utils';
+import { calculateClickedHourAndMinute, getEventStyle } from '@utils/helpers';
+import { HOURS_IN_A_DAY } from '@utils/constants';
 
 @Component({
   selector: 'cal-events-container',
@@ -35,7 +36,10 @@ export class EventsContainerComponent implements OnChanges, OnDestroy {
     return this.eventsSubject.asObservable();
   }
 
-  constructor(private readonly eventService: EventService, private readonly dialog: MatDialog) {}
+  constructor(
+    private readonly eventService: EventService,
+    private readonly dialog: MatDialog,
+  ) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['date'] && this.date) this.loadEvents();

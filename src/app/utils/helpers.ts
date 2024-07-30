@@ -3,10 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { IEventStyle } from '@interfaces/common.interface';
 import { ICalendarEvent } from '@interfaces/event.interface';
 
-export const HOURS_IN_A_DAY = 24;
-export const MINUTES_IN_AN_HOUR = 60;
-export const HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
-export const EMPTY_STRING = '';
+import { HOURS_IN_A_DAY, MINUTES_IN_AN_HOUR } from './constants';
 
 export function calculateClickedHourAndMinute(eventsContainer: Element, clientY: number): { hours: number; minutes: number } {
   const rect = eventsContainer.getBoundingClientRect();

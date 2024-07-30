@@ -2,7 +2,7 @@ Date.prototype.applyHoursAndMinutes = function (date: Date): Date {
   return new Date(this.getFullYear(), this.getMonth(), this.getDate(), date.getHours(), date.getMinutes());
 };
 
-Date.prototype.formatDateTo24HourTimeString = function (): string {
+Date.prototype.to24HourTimeString = function (): string {
   const hours = String(this.getHours()).padStart(2, '0');
   const minutes = String(this.getMinutes()).padStart(2, '0');
 

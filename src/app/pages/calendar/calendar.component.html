@@ -3,13 +3,20 @@
     <mat-toolbar color="primary">
       <mat-icon>event</mat-icon>
       <span>Calendar</span>
+      <span class="spacer"></span>
+      <button mat-raised-button (click)="toggleView()">
+        {{ selectedView === CALENDAR_VIEWS.WEEKLY ? 'Switch to Daily View' : 'Switch to Weekly View' }}
+      </button>
     </mat-toolbar>
     <mat-calendar [selected]="selectedDate" (selectedChange)="onDateChangeHandler($event)" />
   </div>
 
   <cal-daily-view
+    *ngIf="selectedView === CALENDAR_VIEWS.DAILY"
     [date]="selectedDate"
     (onNavigateForward)="onNavigateForwardHandler()"
     (onNavigateBack)="onNavigateBackHandler()"
   />
+
+  <cal-weekly-view *ngIf="selectedView === CALENDAR_VIEWS.WEEKLY" [date]="selectedDate" />
 </div>

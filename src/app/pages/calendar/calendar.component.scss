@@ -4,6 +4,10 @@
   .calendar {
     flex: 0.3;
 
+    .spacer {
+      flex: 1 1 auto;
+    }
+
     mat-toolbar {
       background-color: #1976d2;
       color: white;
@@ -12,6 +16,10 @@
   }
 
   cal-daily-view {
+    flex: 1;
+  }
+
+  cal-weekly-view {
     flex: 1;
   }
 }

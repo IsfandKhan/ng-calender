@@ -1,6 +1,6 @@
 <div class="daily-view-container">
   <mat-toolbar color="primary">
-    <span>{{ date | date: 'dd/MM/YYYY' }}</span>
+    <span>{{ date | date: 'dd' | toNumber | ordinal }} {{ date | date: 'MMMM' }}</span>
     <span class="spacer"></span>
     <button mat-icon-button (click)="navigateBack()">
       <mat-icon>arrow_back</mat-icon>

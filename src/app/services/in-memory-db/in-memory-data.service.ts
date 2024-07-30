@@ -21,6 +21,7 @@ export class InMemoryDataService implements InMemoryDbService {
         end: new Date(new Date().setHours(new Date().getHours() + 8)),
       },
     ];
+
     return { events };
   }
 }

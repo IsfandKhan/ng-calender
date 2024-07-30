@@ -5,12 +5,22 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { EventsContainerComponent } from '@components/events-container/events-container.component';
 import { HoursLabelComponent } from '@components/hours-label/hours-label.component';
+import { OrdinalPipe } from '@pipes/ordinal.pipe';
+import { ToNumberPipe } from '@pipes/to-number.pipe';
 
 @Component({
   selector: 'cal-daily-view',
   templateUrl: './daily-view.component.html',
   styleUrl: './daily-view.component.scss',
-  imports: [CommonModule, MatToolbarModule, MatIconModule, EventsContainerComponent, HoursLabelComponent],
+  imports: [
+    CommonModule,
+    MatToolbarModule,
+    MatIconModule,
+    EventsContainerComponent,
+    HoursLabelComponent,
+    OrdinalPipe,
+    ToNumberPipe,
+  ],
   standalone: true,
 })
 export class DailyViewComponent implements AfterContentChecked {

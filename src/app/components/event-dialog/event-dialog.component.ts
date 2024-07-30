@@ -12,7 +12,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { ICalendarEvent } from '@interfaces/event.interface';
 
-import { EMPTY_STRING, isFormValueRequired, parse24HourTimeString } from '@utils/utils';
+import { isFormValueRequired, parse24HourTimeString } from '@utils/helpers';
+import { EMPTY_STRING } from '@utils/constants';
 
 export type EventDialogDataType = { event: ICalendarEvent } | { date: Date };
 
@@ -77,9 +78,9 @@ export class EventDialogComponent implements OnDestroy {
       title: [title, Validators.required],
       description: [description],
       start: [start, Validators.required],
-      startTime: [start.formatDateTo24HourTimeString(), Validators.required],
+      startTime: [start.to24HourTimeString(), Validators.required],
       end: [end, Validators.required],
-      endTime: [end.addOneHour().formatDateTo24HourTimeString(), Validators.required],
+      endTime: [end.addOneHour().to24HourTimeString(), Validators.required],
     }));
 
     this.minEndDate = new Date(start);

@@ -3,7 +3,7 @@ export {};
 declare global {
   interface Date {
     applyHoursAndMinutes(date: Date): Date;
-    formatDateTo24HourTimeString(): string;
+    to24HourTimeString(): string;
     addOneHour(): Date;
   }
 }
