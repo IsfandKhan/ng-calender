@@ -1,7 +1,6 @@
 # NgCalenderApp
 
-This app uses in memory db for creating, deleting and editing and getting calendar events. For simplicity only 1 hr events can be created
-
+This app uses in memory db for creating, deleting and editing and getting calendar events. Live version of this app can be access on [Netlify](https://ng-cal.netlify.app)
 # Dev Dependencies
 
 **ANGULAR: v18.1.1**
