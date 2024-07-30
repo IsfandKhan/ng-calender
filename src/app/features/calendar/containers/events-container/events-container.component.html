@@ -1,0 +1,29 @@
+<div
+  cdkDropList
+  class="events"
+  [ngStyle]="{ height: eventsContainerHeight + 'px' }"
+  (cdkDropListDropped)="onDropHandler($event)"
+  (click)="onEventContainerClick($event)"
+>
+  @if (events$ | async; as events) {
+    @for (event of events; track event.id) {
+      <div
+        clickStopPropagation
+        cdkDrag
+        class="event-block"
+        [ngStyle]="getEventStyle(event)"
+        (cdkDragStarted)="onDragStartedHandler(event)"
+        (click)="onEventClickHandler(event)"
+      >
+        <div class="event-content">
+          <span class="event-title">{{ event.title }}</span>
+          <span class="event-time">{{ event.start | date: "shortTime" }} - {{ event.end | date: "shortTime" }}</span>
+        </div>
+      </div>
+    }
+  } @else {
+    <div class="spinner">
+      <mat-spinner />
+    </div>
+  }
+</div>

@@ -1,0 +1,17 @@
+<div class="daily-view-container">
+  <mat-toolbar color="primary">
+    <span>{{ date | date: "dd" | toNumber | ordinal }} {{ date | date: "MMMM" }}</span>
+    <span class="spacer"></span>
+    <button mat-icon-button (click)="navigateBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <button mat-icon-button (click)="navigateForward()">
+      <mat-icon>arrow_forward</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <div class="timeline">
+    <cal-hours-label #hoursLabel />
+    <cal-events-container [date]="date" [eventsContainerHeight]="eventsContainerHeight" />
+  </div>
+</div>

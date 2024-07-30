@@ -1,10 +1,10 @@
-import { isObservable, of, map, startWith, catchError, Observable } from 'rxjs';
+import { isObservable, of, map, startWith, catchError, Observable } from "rxjs";
 
-import { Pipe, PipeTransform } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
+import { Pipe, PipeTransform } from "@angular/core";
+import { AsyncPipe } from "@angular/common";
 
 @Pipe({
-  name: 'withLoading',
+  name: "withLoading",
   standalone: true,
 })
 export class WithLoadingPipe implements PipeTransform {

@@ -1,13 +1,13 @@
-import { Directive, HostBinding, Input, OnInit } from '@angular/core';
+import { Directive, HostBinding, Input, OnInit } from "@angular/core";
 
-import { CalendarEvent } from '@interfaces/event.interface';
+import { CalendarEvent } from "@interfaces/event.interface";
 
-@Directive({ selector: '[eventContainer]', standalone: true })
+@Directive({ selector: "[eventContainer]", standalone: true })
 export class EventContainerStyleDirective implements OnInit {
   @Input() public eventContainer: CalendarEvent | null = null;
 
-  @HostBinding('style.top.px') top!: number;
-  @HostBinding('style.height.px') height!: number;
+  @HostBinding("style.top.px") top!: number;
+  @HostBinding("style.height.px") height!: number;
 
   public ngOnInit(): void {
     this.styleEventContainer();

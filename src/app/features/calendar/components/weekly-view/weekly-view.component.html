@@ -1,0 +1,17 @@
+<div class="weekly-view">
+  <div class="day-column" *ngFor="let day of daysOfWeek">
+    <div class="day-header">{{ day | date: "EEEE, MMM d" }}</div>
+    <div class="event-container" (click)="onContainerClickHandler(day)">
+      <div
+        clickStopPropagation
+        class="event"
+        *ngFor="let event of getEventsForDay(day) | async"
+        (click)="onEventClickHandler(event)"
+      >
+        <div class="event-time">{{ event.start | date: "shortTime" }} - {{ event.end | date: "shortTime" }}</div>
+        <div class="event-title">{{ event.title }}</div>
+        <div class="event-description">{{ event.description }}</div>
+      </div>
+    </div>
+  </div>
+</div>

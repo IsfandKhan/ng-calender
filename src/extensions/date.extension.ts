@@ -3,8 +3,8 @@ Date.prototype.applyHoursAndMinutes = function (date: Date): Date {
 };
 
 Date.prototype.to24HourTimeString = function (): string {
-  const hours = String(this.getHours()).padStart(2, '0');
-  const minutes = String(this.getMinutes()).padStart(2, '0');
+  const hours = String(this.getHours()).padStart(2, "0");
+  const minutes = String(this.getMinutes()).padStart(2, "0");
 
   return `${hours}:${minutes}`;
 };

@@ -1,11 +1,14 @@
-import { FormGroup } from '@angular/forms';
+import { FormGroup } from "@angular/forms";
 
-import { EventStyle } from '@interfaces/common.interface';
-import { CalendarEvent } from '@interfaces/event.interface';
+import { EventStyle } from "@interfaces/common.interface";
+import { CalendarEvent } from "@interfaces/event.interface";
 
-import { HOURS_IN_A_DAY, MINUTES_IN_AN_HOUR } from './constants';
+import { HOURS_IN_A_DAY, MINUTES_IN_AN_HOUR } from "./constants";
 
-export function calculateClickedHourAndMinute(eventsContainer: Element, clientY: number): { hours: number; minutes: number } {
+export function calculateClickedHourAndMinute(
+  eventsContainer: Element,
+  clientY: number,
+): { hours: number; minutes: number } {
   const rect = eventsContainer.getBoundingClientRect();
   const offsetY = clientY - rect.top;
   const containerHeight = rect.height;
@@ -24,11 +27,11 @@ export function getEventStyle(event: CalendarEvent): EventStyle {
 }
 
 export function parse24HourTimeString(time: string): Date {
-  const [hours, minutes] = time.split(':');
+  const [hours, minutes] = time.split(":");
 
   return new Date(0, 0, 0, +hours, +minutes);
 }
 
 export function isFormValueRequired(form: FormGroup, controlName: string): boolean {
-  return form.get(controlName)?.hasError('required') || false;
+  return form.get(controlName)?.hasError("required") || false;
 }
