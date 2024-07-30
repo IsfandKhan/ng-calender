@@ -12,8 +12,8 @@ import { EventDialogComponent, EventDialogDataType } from '@components/event-dia
 
 import { ClickStopPropagationDirective } from '@directives/click-stop-propagation.directive';
 
-import { IEventStyle } from '@interfaces/common.interface';
-import { ICalendarEvent } from '@interfaces/event.interface';
+import { EventStyle } from '@interfaces/common.interface';
+import { CalendarEvent } from '@interfaces/event.interface';
 
 import { calculateClickedHourAndMinute, getEventStyle } from '@utils/helpers';
 import { HOURS_IN_A_DAY } from '@utils/constants';
@@ -29,10 +29,10 @@ export class EventsContainerComponent implements OnChanges, OnDestroy {
   @Input() public eventsContainerHeight!: number;
   @Input() public date!: Date;
 
-  private eventsSubject: ReplaySubject<ICalendarEvent[]> = new ReplaySubject(1);
-  private dragEvent: ICalendarEvent | null = null;
+  private eventsSubject: ReplaySubject<CalendarEvent[]> = new ReplaySubject(1);
+  private dragEvent: CalendarEvent | null = null;
 
-  public get events$(): Observable<ICalendarEvent[]> {
+  public get events$(): Observable<CalendarEvent[]> {
     return this.eventsSubject.asObservable();
   }
 
@@ -50,7 +50,7 @@ export class EventsContainerComponent implements OnChanges, OnDestroy {
     this.eventsSubject.complete();
   }
 
-  public getEventStyle(event: ICalendarEvent): IEventStyle {
+  public getEventStyle(event: CalendarEvent): EventStyle {
     return getEventStyle(event);
   }
 
@@ -71,13 +71,13 @@ export class EventsContainerComponent implements OnChanges, OnDestroy {
       .subscribe((result) => result && this.eventService.addEvent(result).subscribe(() => this.loadEvents()));
   }
 
-  public onEventClickHandler(event: ICalendarEvent): void {
+  public onEventClickHandler(event: CalendarEvent): void {
     this.openEventDialog({ event })
       .afterClosed()
       .subscribe((result) => result && this.eventService.updateEvent(result).subscribe(() => this.loadEvents()));
   }
 
-  public onDropHandler(event: CdkDragDrop<ICalendarEvent[]>): void {
+  public onDropHandler(event: CdkDragDrop<CalendarEvent[]>): void {
     if (!this.dragEvent) return;
 
     const clientY = event.dropPoint.y - 50;
@@ -99,15 +99,15 @@ export class EventsContainerComponent implements OnChanges, OnDestroy {
     this.updateCalenderEvents(this.dragEvent);
   }
 
-  public onDragStartedHandler(dragEvent: ICalendarEvent): void {
+  public onDragStartedHandler(dragEvent: CalendarEvent): void {
     this.dragEvent = dragEvent;
   }
 
-  private updateCalenderEvents(event: ICalendarEvent): void {
+  private updateCalenderEvents(event: CalendarEvent): void {
     this.eventService.updateEvent(event).subscribe();
   }
 
-  private openEventDialog(data: EventDialogDataType): MatDialogRef<EventDialogComponent, ICalendarEvent> {
+  private openEventDialog(data: EventDialogDataType): MatDialogRef<EventDialogComponent, CalendarEvent> {
     return this.dialog.open(EventDialogComponent, { width: '500px', data });
   }
 

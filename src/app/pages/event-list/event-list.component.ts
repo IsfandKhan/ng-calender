@@ -12,7 +12,7 @@ import { EventService } from '@services/event/event.service';
 
 import { EventDialogComponent } from '@components/event-dialog/event-dialog.component';
 
-import { ICalendarEvent } from '@interfaces/event.interface';
+import { CalendarEvent } from '@interfaces/event.interface';
 
 @Component({
   selector: 'cal-event-list',
@@ -22,7 +22,7 @@ import { ICalendarEvent } from '@interfaces/event.interface';
   standalone: true,
 })
 export class EventListComponent implements OnInit {
-  public events$!: Observable<ICalendarEvent[]>;
+  public events$!: Observable<CalendarEvent[]>;
 
   constructor(
     private readonly eventService: EventService,
@@ -37,7 +37,7 @@ export class EventListComponent implements OnInit {
     this.events$ = this.eventService.getEvents();
   }
 
-  public viewEvent(event: ICalendarEvent): void {
+  public viewEvent(event: CalendarEvent): void {
     this.dialog
       .open(EventDialogComponent, { width: '500px', data: { event } })
       .afterClosed()

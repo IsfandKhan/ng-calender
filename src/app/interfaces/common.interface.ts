@@ -1,9 +1,9 @@
-export interface ITimeOfDay {
+export interface TimeOfDay {
   hours: number;
   minutes: number;
 }
 
-export interface IEventStyle {
+export interface EventStyle {
   top: string;
   height: string;
 }

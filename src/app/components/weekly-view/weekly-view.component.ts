@@ -7,8 +7,9 @@ import { EventService } from '@services/event/event.service';
 import { EventDialogComponent } from '@components/event-dialog/event-dialog.component';
 import { HoursLabelComponent } from '@components/hours-label/hours-label.component';
 
-import { ICalendarEvent } from '@interfaces/event.interface';
+import { CalendarEvent } from '@interfaces/event.interface';
 import { ClickStopPropagationDirective } from '@directives/click-stop-propagation.directive';
+import { BehaviorSubject, map, Observable, ReplaySubject } from 'rxjs';
 
 @Component({
   selector: 'cal-weekly-view',
@@ -18,9 +19,15 @@ import { ClickStopPropagationDirective } from '@directives/click-stop-propagatio
   styleUrl: './weekly-view.component.scss',
 })
 export class WeeklyViewComponent implements OnChanges, OnInit {
-  @Input() date: Date = new Date();
-  events: ICalendarEvent[] = [];
-  daysOfWeek: Date[] = [];
+  @Input() public date: Date = new Date();
+
+  public daysOfWeek: Date[] = [];
+
+  private eventsSubject = new BehaviorSubject<CalendarEvent[]>([]);
+
+  public get events$(): Observable<CalendarEvent[]> {
+    return this.eventsSubject.asObservable();
+  }
 
   constructor(
     private readonly eventService: EventService,
@@ -28,25 +35,29 @@ export class WeeklyViewComponent implements OnChanges, OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.eventService.getEvents().subscribe((events) => (this.events = events));
+    this.getEvents();
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes['date'] && this.date) {
+    const { date } = changes;
+    if (date && this.date) {
       this.daysOfWeek = [];
       this.generateWeek(this.date);
     }
   }
 
-  public onEventClickHandler(event: ICalendarEvent): void {
+  public onEventClickHandler(event: CalendarEvent): void {
     this.openEventDialog({ event })
       .afterClosed()
       .subscribe(
-        (result: any) =>
+        (result?: CalendarEvent) =>
           result &&
           this.eventService.updateEvent(result).subscribe(() => {
-            const index = this.events.findIndex((e) => e.id === result.id);
-            this.events[index] = result;
+            const events = this.eventsSubject.value;
+            const index = events.findIndex((e) => e.id === result.id);
+
+            events[index] = result;
+            this.eventsSubject.next(events);
           }),
       );
   }
@@ -54,17 +65,21 @@ export class WeeklyViewComponent implements OnChanges, OnInit {
   public onContainerClickHandler(date: Date): void {
     this.openEventDialog({ date })
       .afterClosed()
-      .subscribe((result: any) => {
+      .subscribe((result?: CalendarEvent) => {
         if (result) {
+          const events = this.eventsSubject.value;
           this.eventService.addEvent(result).subscribe();
-          this.events.push(result);
-          this.events.sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime());
+          events.push(result);
+          events.sort((a: CalendarEvent, b: CalendarEvent) => new Date(a.start).getTime() - new Date(b.start).getTime());
+          this.eventsSubject.next(events);
         }
       });
   }
 
-  public getEventsForDay(date: Date): ICalendarEvent[] {
-    return this.events.filter((event) => new Date(event.start).toDateString() === date.toDateString());
+  public getEventsForDay(date: Date): Observable<CalendarEvent[]> {
+    return this.events$.pipe(
+      map((events) => events.filter((event) => new Date(event.start).toDateString() === date.toDateString())),
+    );
   }
 
   private generateWeek(date: Date): void {
@@ -79,7 +94,11 @@ export class WeeklyViewComponent implements OnChanges, OnInit {
     return new Date(date.setDate(diff));
   }
 
-  private openEventDialog(data: { event: ICalendarEvent } | { date: Date }): MatDialogRef<EventDialogComponent, ICalendarEvent> {
+  private openEventDialog(data: { event: CalendarEvent } | { date: Date }): MatDialogRef<EventDialogComponent, CalendarEvent> {
     return this.dialog.open(EventDialogComponent, { width: '500px', data });
+  }
+
+  private getEvents(): void {
+    this.eventService.getEvents().subscribe((events: CalendarEvent[]) => this.eventsSubject.next(events));
   }
 }

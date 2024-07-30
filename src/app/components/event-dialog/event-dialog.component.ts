@@ -10,12 +10,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
-import { ICalendarEvent } from '@interfaces/event.interface';
+import { CalendarEvent } from '@interfaces/event.interface';
 
 import { isFormValueRequired, parse24HourTimeString } from '@utils/helpers';
 import { EMPTY_STRING } from '@utils/constants';
 
-export type EventDialogDataType = { event: ICalendarEvent } | { date: Date };
+export type EventDialogDataType = { event: CalendarEvent } | { date: Date };
 
 @Component({
   selector: 'cal-event-dialog',
@@ -40,7 +40,7 @@ export class EventDialogComponent implements OnDestroy {
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly dialogRef: MatDialogRef<EventDialogComponent, ICalendarEvent>,
+    private readonly dialogRef: MatDialogRef<EventDialogComponent, CalendarEvent>,
     @Inject(MAT_DIALOG_DATA) private readonly data: EventDialogDataType,
   ) {
     this.initializeForm();
@@ -56,7 +56,7 @@ export class EventDialogComponent implements OnDestroy {
     const formValues = this.eventForm.value;
     const start = new Date(formValues.start).applyHoursAndMinutes(parse24HourTimeString(formValues.startTime));
     const end = new Date(formValues.end).applyHoursAndMinutes(parse24HourTimeString(formValues.endTime));
-    const event: ICalendarEvent = { ...formValues, start, end };
+    const event: CalendarEvent = { ...formValues, start, end };
 
     this.dialogRef.close(event);
   }
@@ -70,7 +70,7 @@ export class EventDialogComponent implements OnDestroy {
   }
 
   private initializeForm(): void {
-    const { event, date } = this.data as { event: ICalendarEvent; date: Date };
+    const { event, date } = this.data as { event: CalendarEvent; date: Date };
     const { id = null, title = EMPTY_STRING, description = EMPTY_STRING, start = date, end = date } = { ...event };
 
     const form = (this.eventForm = this.fb.group({

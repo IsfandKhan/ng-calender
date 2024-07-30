@@ -1,20 +1,17 @@
-import { map, Observable } from 'rxjs';
-
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 import { EventService } from '@services/event/event.service';
 
+import { EventDialogComponent } from '@components/event-dialog/event-dialog.component';
+
 import { ClickStopPropagationDirective } from '@directives/click-stop-propagation.directive';
 
-import { IEventStyle } from '@interfaces/common.interface';
-import { ICalendarEvent } from '@interfaces/event.interface';
+import { EventStyle } from '@interfaces/common.interface';
+import { CalendarEvent } from '@interfaces/event.interface';
 
-import { calculateClickedHourAndMinute, getEventStyle, HOURS_IN_A_DAY } from '@utils/utils';
-import { EventDialogComponent } from '@components/event-dialog/event-dialog.component';
+import { getEventStyle } from '@utils/helpers';
 
 @Component({
   selector: 'cal-event-card',
@@ -24,7 +21,7 @@ import { EventDialogComponent } from '@components/event-dialog/event-dialog.comp
   standalone: true,
 })
 export class EventCardComponent {
-  @Input() public event!: ICalendarEvent;
+  @Input() public event!: CalendarEvent;
 
   @Output() public readonly onClick: EventEmitter<void> = new EventEmitter();
 
@@ -33,7 +30,7 @@ export class EventCardComponent {
     private readonly dialog: MatDialog,
   ) {}
 
-  public getEventStyle(event: ICalendarEvent): IEventStyle {
+  public getEventStyle(event: CalendarEvent): EventStyle {
     return getEventStyle(event);
   }
 

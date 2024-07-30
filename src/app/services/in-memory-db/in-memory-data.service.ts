@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { ICalendarEvent } from '../../interfaces/event.interface';
+import { CalendarEvent } from '../../interfaces/event.interface';
 
 @Injectable({ providedIn: 'root' })
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
-    const events: ICalendarEvent[] = [
+    const events: CalendarEvent[] = [
       {
         id: 1,
         title: 'Meeting',

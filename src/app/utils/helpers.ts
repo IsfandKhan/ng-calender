@@ -1,7 +1,7 @@
 import { FormGroup } from '@angular/forms';
 
-import { IEventStyle } from '@interfaces/common.interface';
-import { ICalendarEvent } from '@interfaces/event.interface';
+import { EventStyle } from '@interfaces/common.interface';
+import { CalendarEvent } from '@interfaces/event.interface';
 
 import { HOURS_IN_A_DAY, MINUTES_IN_AN_HOUR } from './constants';
 
@@ -16,7 +16,7 @@ export function calculateClickedHourAndMinute(eventsContainer: Element, clientY:
   return { hours, minutes };
 }
 
-export function getEventStyle(event: ICalendarEvent): IEventStyle {
+export function getEventStyle(event: CalendarEvent): EventStyle {
   const startMinutes = event.start.getHours() * MINUTES_IN_AN_HOUR + event.start.getMinutes();
   const endMinutes = event.end.getHours() * MINUTES_IN_AN_HOUR + event.end.getMinutes();
 
